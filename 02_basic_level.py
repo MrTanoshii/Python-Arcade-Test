@@ -2,7 +2,7 @@
 Basic Level Platformer Game
 
 User interaction:
-KEY             |   Effect
+Input           |   Effect
 ----------------|---------------------------------------
 WASD/Arrow      |   Move player character
 F               |   Toggle camera from following player

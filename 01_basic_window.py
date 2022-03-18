@@ -2,7 +2,7 @@
 Basic Window
 
 User interaction:
-KEY             |   Effect
+Input           |   Effect
 ----------------|------------------------------------------------------------
 1-3             |   Resize & center window
 Left click      |   Set random window background color
