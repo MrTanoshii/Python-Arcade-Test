@@ -1,8 +1,8 @@
 <div align="center">
-  <a href="#">
+  <a href="https://www.python.org/">
     <img src="https://img.shields.io/badge/Python-v3.10-blue" alt="Python v3.10">
   </a>
-  <a href="#">
+  <a href="https://api.arcade.academy/en/2.6.11/">
     <img src="https://img.shields.io/badge/Arcade-v2.6.11-blue" alt="Arcade v2.6.11">
   </a>
 </div>
