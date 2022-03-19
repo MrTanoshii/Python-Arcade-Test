@@ -53,6 +53,30 @@ class PlayerCharacter(arcade.Sprite):
             self.idle_textures[LEFT_FACING].append(arcade.load_texture(
                 "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Idle (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
 
+        # Load run animation textures
+        self.run_textures = [[], []]
+        for i in range(12):
+            self.run_textures[RIGHT_FACING].append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Run (32x32).png", 32*i, 0, 32, 32, hit_box_algorithm="Detailed", hit_box_detail=1))
+            self.run_textures[LEFT_FACING].append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Run (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
+
+        # Load jump animation textures
+        self.jump_textures = []
+        for i in range(1):
+            self.jump_textures.append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Jump (32x32).png", 32*i, 0, 32, 32, hit_box_algorithm="Detailed", hit_box_detail=1))
+            self.jump_textures.append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Jump (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
+
+        # Load fall animation textures
+        self.fall_textures = []
+        for i in range(1):
+            self.fall_textures.append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Fall (32x32).png", 32*i, 0, 32, 32, hit_box_algorithm="Detailed", hit_box_detail=1))
+            self.fall_textures.append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Fall (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
+
         # Set initial texture
         self.character_face_direction = RIGHT_FACING
         self.cur_texture = 0
@@ -65,15 +89,25 @@ class PlayerCharacter(arcade.Sprite):
         elif self.change_x > 0 and self.character_face_direction == LEFT_FACING:
             self.character_face_direction = RIGHT_FACING
 
-        # Idle animation
-        if self.change_x == 0:
-            self.cur_texture += 1
-            if self.cur_texture > 10:
-                self.cur_texture = 0
-            if self.character_face_direction == LEFT_FACING:
-                self.texture = self.idle_textures[LEFT_FACING][self.cur_texture]
+        # Jump animation
+        if self.change_y > 0:
+            self.texture = self.jump_textures[self.character_face_direction]
+        # Fall animation
+        elif self.change_y < 0:
+            self.texture = self.fall_textures[self.character_face_direction]
+        else:
+            # Idle animation
+            if self.change_x == 0:
+                self.cur_texture += 1
+                if self.cur_texture > len(self.idle_textures[self.character_face_direction]) - 1:
+                    self.cur_texture = 0
+                self.texture = self.idle_textures[self.character_face_direction][self.cur_texture]
+            # Run animation
             else:
-                self.texture = self.idle_textures[RIGHT_FACING][self.cur_texture]
+                self.cur_texture += 1
+                if self.cur_texture > len(self.run_textures[self.character_face_direction]) - 1:
+                    self.cur_texture = 0
+                self.texture = self.run_textures[self.character_face_direction][self.cur_texture]
 
         # Calculate & set new hit box
         self.set_hit_box(
