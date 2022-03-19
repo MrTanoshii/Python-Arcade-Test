@@ -6,6 +6,7 @@ Input           |   Effect
 ----------------|---------------------------------------
 WASD/Arrow      |   Move player character
 F               |   Toggle camera from following player
+H               |   Toggle hitbox visibility
 """
 import arcade
 import random
@@ -98,6 +99,9 @@ class TestGame(arcade.Window):
         # Our physics engine
         self.physics_engine = None
 
+        # Hitbox
+        self.enable_hitbox = False
+
         arcade.set_background_color(arcade.csscolor.CORNFLOWER_BLUE)
 
     def setup(self):
@@ -156,7 +160,8 @@ class TestGame(arcade.Window):
 
         # Draw our Scene
         self.scene.draw()
-        self.scene.draw_hit_boxes((255, 0, 0, 255), 1)
+        if self.enable_hitbox == True:
+            self.scene.draw_hit_boxes((255, 0, 0, 255), 1)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed."""
@@ -175,6 +180,9 @@ class TestGame(arcade.Window):
                 self.camera_mode = CAMERA_MODE_FOLLOW
             else:
                 self.camera_mode = CAMERA_MODE_DEFAULT
+        # Handle H key for hitbox toggle
+        elif key == arcade.key.H:
+            self.enable_hitbox = not self.enable_hitbox
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key."""
