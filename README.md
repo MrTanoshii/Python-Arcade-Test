@@ -25,6 +25,8 @@
 | Left click | Set random window background color                       |
 | Scroll     | Increase/Decrease red channel of window background color |
 
+![01 Basic Window Preview](assets/Previews/01_basic_window.gif)
+
 ### 02 Basic Level
 
 | Input      | Effect                              |
@@ -32,6 +34,8 @@
 | WASD/Arrow | Move player character               |
 | F          | Toggle camera from following player |
 | H          | Toggle hitbox visibility            |
+
+![02 Basic Level Preview](assets/Previews/02_basic_level.gif)
 
 ## Assets
 
