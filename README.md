@@ -31,6 +31,7 @@
 | ---------- | ----------------------------------- |
 | WASD/Arrow | Move player character               |
 | F          | Toggle camera from following player |
+| H          | Toggle hitbox visibility            |
 
 ## Assets
 
