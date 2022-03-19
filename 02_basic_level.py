@@ -46,18 +46,17 @@ class PlayerCharacter(arcade.Sprite):
         super().__init__()
 
         # Load idle animation textures
-        self.idle_textures_left_facing = []
-        self.idle_textures_right_facing = []
+        self.idle_textures = [[], []]
         for i in range(11):
-            self.idle_textures_left_facing.append(arcade.load_texture(
-                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Idle (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
-            self.idle_textures_right_facing.append(arcade.load_texture(
+            self.idle_textures[RIGHT_FACING].append(arcade.load_texture(
                 "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Idle (32x32).png", 32*i, 0, 32, 32, hit_box_algorithm="Detailed", hit_box_detail=1))
+            self.idle_textures[LEFT_FACING].append(arcade.load_texture(
+                "assets/Pixel Adventure 1/Free/Main Characters/Mask Dude/Idle (32x32).png", 32*i, 0, 32, 32, True, hit_box_algorithm="Detailed", hit_box_detail=1))
 
         # Set initial texture
         self.character_face_direction = RIGHT_FACING
         self.cur_texture = 0
-        self.texture = self.idle_textures_right_facing[self.cur_texture]
+        self.texture = self.idle_textures[RIGHT_FACING][self.cur_texture]
 
     def update_animation(self, delta_time: float = 1 / 60):
         # Flip character left or right
@@ -67,13 +66,14 @@ class PlayerCharacter(arcade.Sprite):
             self.character_face_direction = RIGHT_FACING
 
         # Idle animation
-        self.cur_texture += 1
-        if self.cur_texture > 10:
-            self.cur_texture = 0
-        if self.character_face_direction == LEFT_FACING:
-            self.texture = self.idle_textures_left_facing[self.cur_texture]
-        else:
-            self.texture = self.idle_textures_right_facing[self.cur_texture]
+        if self.change_x == 0:
+            self.cur_texture += 1
+            if self.cur_texture > 10:
+                self.cur_texture = 0
+            if self.character_face_direction == LEFT_FACING:
+                self.texture = self.idle_textures[LEFT_FACING][self.cur_texture]
+            else:
+                self.texture = self.idle_textures[RIGHT_FACING][self.cur_texture]
 
         # Calculate & set new hit box
         self.set_hit_box(
